@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DynamicTest;
@@ -28,30 +29,25 @@ public class TestDroolsBatchFactory {
 	}
 
 	@TestFactory
-	public Collection<DynamicTest> excelExtratorforUnit() throws Exception {
+	public Stream<DynamicTest> excelExtratorforUnit() throws Exception {
 
 		KieServices kieServices = KieServices.Factory.get();
 		KieContainer kContainer = kieServices.getKieClasspathContainer();
 		StatelessKieSession kieSession = kContainer.getKieBase().newStatelessKieSession();
 
-		List<ItemUnitTestRow> listTest = Reader.of(ItemUnitTestRow.class)
-				.from(new File(TestDroolsBatchFactoryProperties
-						.getString(TestDroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME)))
-				.sheet(TestDroolsBatchFactoryProperties
-						.getString(TestDroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET))
-				.list(); // $NON-NLS-1$ //$NON-NLS-2$
+		File excelFile = new File(TestDroolsBatchFactoryProperties
+				.getString(TestDroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
+		String sheetName = TestDroolsBatchFactoryProperties
+				.getString(TestDroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
 
-		Collection<DynamicTest> ret = new ArrayList<>();
-		for (ItemUnitTestRow unit : listTest) {
+		return Reader.of(ItemUnitTestRow.class).from(excelFile).sheet(sheetName).list().stream()
+				.map(unit -> mapItemUnitTestRowtoDynamicTest((ItemUnitTestRow) unit, kieSession));
+	}
 
-			String testName = ItemUnitTestRow.class.getName() + " [" + unit.getRowNumber() + "] = " + unit; //$NON-NLS-1$ //$NON-NLS-2$
-			DynamicTest dTest = DynamicTest.dynamicTest(testName,
-					ItemUnitTestExecutor.builder().addKieSession(kieSession).addUnitTest(unit));
-
-			ret.add(dTest);
-		}
-		logger.debug("Return " + ret.size() + " Test(s) unit"); //$NON-NLS-1$ //$NON-NLS-2$
-		return ret;
+	public static DynamicTest mapItemUnitTestRowtoDynamicTest(ItemUnitTestRow unit, StatelessKieSession kieSession) {
+		String testName = ItemUnitTestRow.class.getName() + " [" + unit.getRowNumber() + "] = " + unit; //$NON-NLS-1$ //$NON-NLS-2$
+		return DynamicTest.dynamicTest(testName,
+				ItemUnitTestExecutor.builder().addKieSession(kieSession).addUnitTest(unit));
 	}
 
 }
