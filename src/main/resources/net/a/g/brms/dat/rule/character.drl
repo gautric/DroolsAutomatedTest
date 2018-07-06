@@ -1,0 +1,55 @@
+package net.a.g.brms.dat.rule;
+
+import net.a.g.brms.dat.model.fact.Character;
+import net.a.g.brms.dat.model.fact.ExecutionResult;
+
+import net.a.g.brms.dat.model.enumeration.Gender;
+import net.a.g.brms.dat.model.enumeration.Species;
+
+global org.slf4j.Logger logger
+
+
+query "getResult" 
+    result : ExecutionResult()
+end
+
+rule "test young for human"
+when
+	c : Character(species == Species.HUMAN, age < 18 )
+then
+	logger.info("call Character Human Young " + c);	
+	insert(ExecutionResult.builder().addAdult(false).addOk(true));
+end
+
+rule "test adult for human"
+when
+	c : Character(species == Species.HUMAN, age >= 18 )
+then
+	logger.info("call Character Human Adult " + c);	
+	insert(ExecutionResult.builder().addAdult(true).addOk(true));
+end
+
+rule "test young for wookie"
+when
+	c : Character(species == Species.WOOKIEE, age < 75 )
+then
+	logger.info("call Character Wookie " + c);	
+	insert(ExecutionResult.builder().addAdult(false).addOk(true));
+end
+
+rule "test adult for wookie"
+when
+	c : Character(species == Species.WOOKIEE, age >= 75 )
+then
+	logger.info("call Character Wookie " + c);	
+	insert(ExecutionResult.builder().addAdult(true).addOk(true));
+end
+
+rule "test unknow spieces"
+when
+	c : Character(species == Species.UNKNOW)
+then
+	logger.info("call Character Unkown " + c);	
+	insert(ExecutionResult.builder().addOk(false).addMessage("N/A"));
+end
+
