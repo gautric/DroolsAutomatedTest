@@ -1,5 +1,6 @@
 package net.a.g.brms.dat.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
@@ -31,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.creditdatamw.zerocell.Reader;
 
 import net.a.g.brms.dat.model.fact.Character;
-import net.a.g.brms.dat.model.fact.ExecutionResult;
+import net.a.g.brms.dat.model.fact.Result;
 
 @RunWith(JUnitPlatform.class)
 public class TestDroolsBatchFactory {
@@ -45,7 +46,7 @@ public class TestDroolsBatchFactory {
 	public void setUp() {
 	}
 
-	@TestFactory()
+	@TestFactory
 	public Collection<DynamicTest> excelExtratorforUnit() throws Exception {
 
 		KieServices kieServices = KieServices.Factory.get();
@@ -75,15 +76,15 @@ public class TestDroolsBatchFactory {
 						LoggerFactory.getLogger(TestDroolsBatchFactory.class.getPackage().getName() + ".rule")));
 				cmds.add(new InsertObjectCommand(c));
 				cmds.add(new FireAllRulesCommand("object"));
-
-				cmds.add(new DisposeCommand());
 				cmds.add(new QueryCommand(RESULTS, "getResult"));
 
 				ExecutionResults response = kieSession.execute(CommandFactory.newBatchExecution(cmds));
 
 				FlatQueryResults queryResult = (FlatQueryResults) response.getValue(RESULTS);
 
-				ExecutionResult er = (ExecutionResult) queryResult.iterator().next().get(RESULT);
+				Result er = (Result) queryResult.iterator().next().get(RESULT);
+
+				assertNotNull(er);
 
 				assertEquals(unit.isResult(), er.isOk());
 				if (unit.isResult()) {

@@ -1,9 +1,9 @@
 package net.a.g.brms.dat.model.fact;
 
-public class ExecutionResult {
+public class Result {
 
-	public static ExecutionResult builder() {
-		return new ExecutionResult();
+	public static Result builder() {
+		return new Result();
 	}
 
 	private boolean adult;
@@ -12,20 +12,20 @@ public class ExecutionResult {
 
 	private boolean ok;
 
-	public ExecutionResult() {
+	public Result() {
 	}
 
-	public ExecutionResult addAdult(boolean adult) {
+	public Result addAdult(boolean adult) {
 		this.adult = adult;
 		return this;
 	}
 
-	public ExecutionResult addMessage(String message) {
+	public Result addMessage(String message) {
 		this.message = message;
 		return this;
 	}
 
-	public ExecutionResult addOk(boolean ok) {
+	public Result addOk(boolean ok) {
 		this.ok = ok;
 		return this;
 	}
