@@ -1,7 +1,7 @@
-package net.a.g.brms.dat.model.fact;
+package net.a.g.brms.dat.model;
 
-import net.a.g.brms.dat.model.enumeration.Gender;
-import net.a.g.brms.dat.model.enumeration.Species;
+import net.a.g.brms.dat.enumeration.Gender;
+import net.a.g.brms.dat.enumeration.Species;
 
 public class Character {
 

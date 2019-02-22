@@ -1,9 +1,9 @@
-package net.a.g.brms.dat.test;
+package net.a.g.brms.dat.test.util;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class TestDroolsBatchFactoryProperties {
+public class DroolsBatchFactoryProperties {
 	private static final String BUNDLE_NAME = "character-unit-test"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);

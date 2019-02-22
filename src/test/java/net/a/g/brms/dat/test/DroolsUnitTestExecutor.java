@@ -19,18 +19,19 @@ import org.kie.api.runtime.StatelessKieSession;
 import org.kie.internal.command.CommandFactory;
 import org.slf4j.LoggerFactory;
 
-import net.a.g.brms.dat.model.fact.Character;
-import net.a.g.brms.dat.model.fact.Result;
+import net.a.g.brms.dat.model.Character;
+import net.a.g.brms.dat.model.Result;
+import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
 
-public class ItemUnitTestExecutor implements Executable {
+public class DroolsUnitTestExecutor implements Executable {
 
 	private static final String RESULT = "result";
 	private static final String RESULTS = "results";
 	private StatelessKieSession kieSession;
 	private ItemUnitTestRow unitTest;
 
-	public static ItemUnitTestExecutor builder() {
-		return new ItemUnitTestExecutor();
+	public static DroolsUnitTestExecutor builder() {
+		return new DroolsUnitTestExecutor();
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class ItemUnitTestExecutor implements Executable {
 		@SuppressWarnings("rawtypes")
 		List<Command> cmds = new ArrayList<Command>();
 		cmds.add(new SetGlobalCommand("logger",
-				LoggerFactory.getLogger(TestDroolsBatchFactory.class.getPackage().getName() + ".rule")));
+				LoggerFactory.getLogger(DroolsBatchFactoryTest.class.getPackage().getName() + ".rule")));
 		cmds.add(new InsertObjectCommand(c));
 		cmds.add(new FireAllRulesCommand("object"));
 		cmds.add(new QueryCommand(RESULTS, "getResult"));
@@ -52,8 +53,10 @@ public class ItemUnitTestExecutor implements Executable {
 
 		FlatQueryResults queryResult = (FlatQueryResults) response.getValue(RESULTS);
 
+		
 		Result er = (Result) queryResult.iterator().next().get(RESULT);
-
+		
+		
 		assertNotNull(er);
 
 		assertEquals(unitTest.isResult(), er.isOk());
@@ -80,12 +83,12 @@ public class ItemUnitTestExecutor implements Executable {
 		this.unitTest = unitTest;
 	}
 
-	public ItemUnitTestExecutor addKieSession(StatelessKieSession kieSession) {
+	public DroolsUnitTestExecutor addKieSession(StatelessKieSession kieSession) {
 		this.kieSession = kieSession;
 		return this;
 	}
 
-	public ItemUnitTestExecutor addUnitTest(ItemUnitTestRow unitTest) {
+	public DroolsUnitTestExecutor addUnitTest(ItemUnitTestRow unitTest) {
 		this.unitTest = unitTest;
 		return this;
 	}

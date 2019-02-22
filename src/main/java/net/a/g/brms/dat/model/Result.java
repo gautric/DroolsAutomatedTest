@@ -1,4 +1,4 @@
-package net.a.g.brms.dat.model.fact;
+package net.a.g.brms.dat.model;
 
 public class Result {
 

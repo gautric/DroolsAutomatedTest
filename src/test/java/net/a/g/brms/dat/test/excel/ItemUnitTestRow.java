@@ -1,15 +1,15 @@
-package net.a.g.brms.dat.test;
+package net.a.g.brms.dat.test.excel;
 
 import com.creditdatamw.zerocell.annotation.Column;
 import com.creditdatamw.zerocell.annotation.RowNumber;
 import com.creditdatamw.zerocell.annotation.ZerocellReaderBuilder;
 
-import net.a.g.brms.dat.model.enumeration.Gender;
-import net.a.g.brms.dat.model.enumeration.Species;
-import net.a.g.brms.dat.test.util.AdultConverter;
-import net.a.g.brms.dat.test.util.GenderConverter;
-import net.a.g.brms.dat.test.util.ResultConverter;
-import net.a.g.brms.dat.test.util.SpeciesConverter;
+import net.a.g.brms.dat.enumeration.Gender;
+import net.a.g.brms.dat.enumeration.Species;
+import net.a.g.brms.dat.test.converter.AdultConverter;
+import net.a.g.brms.dat.test.converter.GenderConverter;
+import net.a.g.brms.dat.test.converter.ResultConverter;
+import net.a.g.brms.dat.test.converter.SpeciesConverter;
 
 @ZerocellReaderBuilder
 public class ItemUnitTestRow {

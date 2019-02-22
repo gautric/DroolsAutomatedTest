@@ -14,9 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import com.creditdatamw.zerocell.Reader;
 
-public class TestDroolsBatchFactory {
+import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
+import net.a.g.brms.dat.test.util.DroolsBatchFactoryProperties;
 
-	private static Logger logger = LoggerFactory.getLogger(TestDroolsBatchFactory.class);
+public class DroolsBatchFactoryTest {
+
+	private static Logger logger = LoggerFactory.getLogger(DroolsBatchFactoryTest.class);
 
 	@BeforeEach
 	public void setUp() {
@@ -29,10 +32,10 @@ public class TestDroolsBatchFactory {
 		KieContainer kContainer = kieServices.getKieClasspathContainer();
 		StatelessKieSession kieSession = kContainer.getKieBase().newStatelessKieSession();
 
-		File excelFile = new File(TestDroolsBatchFactoryProperties
-				.getString(TestDroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
-		String sheetName = TestDroolsBatchFactoryProperties
-				.getString(TestDroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
+		File excelFile = new File(DroolsBatchFactoryProperties
+				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
+		String sheetName = DroolsBatchFactoryProperties
+				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
 
 		return Reader.of(ItemUnitTestRow.class).from(excelFile).sheet(sheetName).list().stream()
 				.map(unit -> mapItemUnitTestRowtoDynamicTest((ItemUnitTestRow) unit, kieSession));
@@ -41,7 +44,7 @@ public class TestDroolsBatchFactory {
 	public static DynamicTest mapItemUnitTestRowtoDynamicTest(ItemUnitTestRow unit, StatelessKieSession kieSession) {
 		String testName = ItemUnitTestRow.class.getName() + " [" + unit.getRowNumber() + "] = " + unit; //$NON-NLS-1$ //$NON-NLS-2$
 		return DynamicTest.dynamicTest(testName,
-				ItemUnitTestExecutor.builder().addKieSession(kieSession).addUnitTest(unit));
+				DroolsUnitTestExecutor.builder().addKieSession(kieSession).addUnitTest(unit));
 	}
 
 }

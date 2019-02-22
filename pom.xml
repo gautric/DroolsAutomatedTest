@@ -5,6 +5,7 @@
 	<groupId>net.a.g.brms</groupId>
 	<artifactId>drools-automated-test</artifactId>
 	<version>1.0.0</version>
+	<packaging>kjar</packaging>
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -12,7 +13,7 @@
 		<kie.bom.version>7.17.0.Final</kie.bom.version>
 
 		<junit.bom.version>5.4.0</junit.bom.version>
-		
+
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
@@ -64,6 +65,16 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-canonical-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-model-compiler</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-runner</artifactId>
 			<scope>test</scope>
@@ -111,6 +122,20 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-maven-plugin</artifactId>
+				<version>${kie.bom.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+
+						</goals>
+						<phase>compile</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

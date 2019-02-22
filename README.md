@@ -4,6 +4,8 @@ But : Automatiser les tests en utilisant des Excel comme fiche de test
 
 Goal : Automate test using Excel document to validate in this case Drools Engine.
 
+[![Build Status](https://travis-ci.org/gautric/DroolsAutomatedTest.svg?branch=master)](https://travis-ci.org/gautric/DroolsAutomatedTest)
+
 ## Fiche de test
 
 Le fichier des tests est disponibles dans le repertoire _src/test/resources_

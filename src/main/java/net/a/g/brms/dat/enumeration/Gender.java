@@ -1,4 +1,4 @@
-package net.a.g.brms.dat.model.enumeration;
+package net.a.g.brms.dat.enumeration;
 
 /**
  * Following <https://en.wikipedia.org/wiki/ISO/IEC_5218>

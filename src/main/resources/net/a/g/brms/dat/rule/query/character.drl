@@ -1,0 +1,9 @@
+package net.a.g.brms.dat.rule;
+
+import net.a.g.brms.dat.model.Result;
+
+global org.slf4j.Logger logger
+
+query "getResult"
+    result : Result()
+end
