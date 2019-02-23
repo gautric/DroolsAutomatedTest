@@ -2,10 +2,6 @@ package net.a.g.brms.dat.model;
 
 public class Result {
 
-	public static Result builder() {
-		return new Result();
-	}
-
 	private boolean adult;
 
 	private String message;
@@ -13,21 +9,6 @@ public class Result {
 	private boolean ok;
 
 	public Result() {
-	}
-
-	public Result addAdult(boolean adult) {
-		this.adult = adult;
-		return this;
-	}
-
-	public Result addMessage(String message) {
-		this.message = message;
-		return this;
-	}
-
-	public Result addOk(boolean ok) {
-		this.ok = ok;
-		return this;
 	}
 
 	public String getMessage() {
