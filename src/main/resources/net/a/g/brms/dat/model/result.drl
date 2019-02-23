@@ -1,0 +1,9 @@
+package net.a.g.brms.dat.model;
+
+global org.slf4j.Logger logger
+
+declare Result
+    adult: boolean
+	message: String
+	ok: boolean
+end

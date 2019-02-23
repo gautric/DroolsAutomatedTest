@@ -14,19 +14,18 @@ import org.drools.core.command.runtime.rule.QueryCommand;
 import org.drools.core.runtime.rule.impl.FlatQueryResults;
 import org.junit.jupiter.api.function.Executable;
 import org.kie.api.command.Command;
+import org.kie.api.definition.type.FactType;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.internal.command.CommandFactory;
 import org.slf4j.LoggerFactory;
 
 import net.a.g.brms.dat.model.Character;
-import net.a.g.brms.dat.model.Result;
 import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
+import net.a.g.brms.dat.util.Constantes;
 
 public class DroolsUnitTestExecutor implements Executable {
 
-	private static final String RESULT = "result";
-	private static final String RESULTS = "results";
 	private StatelessKieSession kieSession;
 	private ItemUnitTestRow unitTest;
 
@@ -37,33 +36,33 @@ public class DroolsUnitTestExecutor implements Executable {
 	@Override
 	public void execute() throws Throwable {
 
+		FactType resultFactType = kieSession.getKieBase().getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL, Constantes.RESULTTYPE);
+
 		Character c = new Character();
 
 		BeanUtils.copyProperties(c, unitTest);
 
 		@SuppressWarnings("rawtypes")
 		List<Command> cmds = new ArrayList<Command>();
-		cmds.add(new SetGlobalCommand("logger",
+		cmds.add(new SetGlobalCommand(Constantes.LOGGER,
 				LoggerFactory.getLogger(DroolsBatchFactoryTest.class.getPackage().getName() + ".rule")));
 		cmds.add(new InsertObjectCommand(c));
-		cmds.add(new FireAllRulesCommand("object"));
-		cmds.add(new QueryCommand(RESULTS, "getResult"));
+		cmds.add(new FireAllRulesCommand(Constantes.OBJECT));
+		cmds.add(new QueryCommand(Constantes.RESULTS, Constantes.GET_RESULT));
 
 		ExecutionResults response = kieSession.execute(CommandFactory.newBatchExecution(cmds));
 
-		FlatQueryResults queryResult = (FlatQueryResults) response.getValue(RESULTS);
+		FlatQueryResults queryResult = (FlatQueryResults) response.getValue(Constantes.RESULTS);
 
-		
-		Result er = (Result) queryResult.iterator().next().get(RESULT);
-		
-		
+		Object er = (Object) queryResult.iterator().next().get(Constantes.RESULT);
+
 		assertNotNull(er);
 
-		assertEquals(unitTest.isResult(), er.isOk());
+		assertEquals(unitTest.isResult(), resultFactType.get(er, "ok"));
 		if (unitTest.isResult()) {
-			assertEquals(unitTest.isAdult(), er.isAdult());
+			assertEquals(unitTest.isAdult(), resultFactType.get(er, "adult"));
 		} else {
-			assertEquals(unitTest.getMessage(), er.getMessage());
+			assertEquals(unitTest.getMessage(), resultFactType.get(er, "message"));
 		}
 	}
 
