@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
+import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.StatelessKieSession;
@@ -28,12 +29,14 @@ public class DroolsBatchFactoryTest {
 	@TestFactory
 	public Stream<DynamicTest> excelExtratorforUnit() throws Exception {
 
-		KieServices kieServices = KieServices.Factory.get();
-		KieContainer kContainer = kieServices.getKieClasspathContainer();
-		StatelessKieSession kieSession = kContainer.getKieBase().newStatelessKieSession();
+		KieServices kServices = KieServices.Factory.get();
+		KieContainer kContainer = kServices.getKieClasspathContainer();
+		KieBase kBase = kContainer.getKieBase();
 
-		File excelFile = new File(DroolsBatchFactoryProperties
-				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
+		StatelessKieSession kieSession = kBase.newStatelessKieSession();
+
+		File excelFile = new File(
+				DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
 		String sheetName = DroolsBatchFactoryProperties
 				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
 
