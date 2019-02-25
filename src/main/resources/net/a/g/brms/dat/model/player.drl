@@ -4,12 +4,6 @@ package net.a.g.brms.dat.model;
 import net.a.g.brms.dat.enumeration.Gender;
 import net.a.g.brms.dat.enumeration.Species;
 
-declare Result
-    adult: boolean
-	message: String
-	ok: boolean
-end
-
 
 declare Player
     name: String

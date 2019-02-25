@@ -1,0 +1,7 @@
+package net.a.g.brms.dat.model;
+
+declare Result
+    adult: boolean
+	message: String
+	ok: boolean
+end
