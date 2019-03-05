@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.kie.api.KieBase;
@@ -27,7 +28,7 @@ public class DroolsBatchFactoryTest {
 	}
 
 	@TestFactory
-	public Stream<DynamicTest> excelExtratorforUnit() throws Exception {
+	public Stream<DynamicNode> excelExtratorforUnit() throws Exception {
 
 		KieServices kServices = KieServices.Factory.get();
 		KieContainer kContainer = kServices.getKieClasspathContainer();
@@ -44,7 +45,7 @@ public class DroolsBatchFactoryTest {
 				.map(unit -> mapItemUnitTestRowtoDynamicTest((ItemUnitTestRow) unit, kieSession));
 	}
 
-	public static DynamicTest mapItemUnitTestRowtoDynamicTest(ItemUnitTestRow unit, StatelessKieSession kieSession) {
+	public static DynamicNode mapItemUnitTestRowtoDynamicTest(ItemUnitTestRow unit, StatelessKieSession kieSession) {
 		String testName = ItemUnitTestRow.class.getName() + " [" + unit.getRowNumber() + "] = " + unit; //$NON-NLS-1$ //$NON-NLS-2$
 		return DynamicTest.dynamicTest(testName,
 				DroolsUnitTestExecutor.builder().addKieSession(kieSession).addUnitTest(unit));
