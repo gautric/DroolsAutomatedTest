@@ -27,7 +27,7 @@ JUnit 5 can manage dynamic test case. It uses Factory pattern to load a set of t
 We could also use some other providers like a CSV file or Database.
 To parse Excel file we gonna use [Zerocell](https://github.com/creditdatamw/zerocell) library providing a very simple and flexible Excel reader.
 
-Class _DroolsBatchFactoryTest_ is the principal class (the factory). It reads Excel file, loads it into a list of _ItemUnitTestRow_ and create a list of test case _DroolsUnitTestExecutor_. Class _DroolsUnitTestExecutor_ provides the main function to validate a test, will use _ItemUnitTestRow_ to create some input parameters, execute Drools engine and reuse _ItemUnitTestRow_ for testing the result. This class should manage the whole test flow and, must be robust and reliable.
+ _DroolsBatchFactoryTest_  class is the principal class (the factory). It reads Excel file, loads it into a list of _ItemUnitTestRow_ and create a list of test case excutor _DroolsUnitTestExecutor_. Class _DroolsUnitTestExecutor_ provides the main function to validate a test, will use _ItemUnitTestRow_ to create some input parameters, execute Drools engine and reuse _ItemUnitTestRow_ for testing the result. This class should manage the whole test flow and, must be robust and reliable.
 
 ## Maven Mode
 
