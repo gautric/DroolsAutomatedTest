@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.drools.core.command.runtime.rule.AgendaGroupSetFocusCommand;
 import org.drools.core.command.runtime.rule.FireAllRulesCommand;
 import org.drools.core.command.runtime.rule.InsertObjectCommand;
 import org.drools.core.command.runtime.rule.QueryCommand;
@@ -49,6 +50,8 @@ public class DroolsUnitTestExecutor implements Executable {
 		List<Command> cmds = new ArrayList<Command>();
 
 		cmds.add(new InsertObjectCommand(player));
+		cmds.add(new AgendaGroupSetFocusCommand(Constantes.RULEFLOW_GROUP));
+
 		cmds.add(new FireAllRulesCommand());
 		cmds.add(new QueryCommand(Constantes.RESULTS, Constantes.GET_RESULT));
 

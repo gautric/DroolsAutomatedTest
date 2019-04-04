@@ -32,7 +32,7 @@ public class DroolsBatchFactoryTest {
 
 		KieServices kServices = KieServices.Factory.get();
 		KieContainer kContainer = kServices.getKieClasspathContainer();
-		KieBase kBase = kContainer.getKieBase();
+		KieBase kBase = kContainer.getKieBase("DroolsBatchFactory-default-kbase");
 
 		StatelessKieSession kieSession = kBase.newStatelessKieSession();
 
