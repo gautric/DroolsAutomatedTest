@@ -18,5 +18,6 @@ public final class Constantes {
 	public static final String NAME = "name";
 	public static final String PLAYER = "Player";
 	public static final String RULEFLOW_GROUP = "player";
+	public static final String FIRED = "fired";
 
 }

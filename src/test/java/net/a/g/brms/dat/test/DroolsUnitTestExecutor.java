@@ -42,7 +42,8 @@ public class DroolsUnitTestExecutor implements Executable {
 		Object player = characterFactType.newInstance();
 
 		characterFactType.set(player, Constantes.NAME, PropertyUtils.getSimpleProperty(unitTest, Constantes.NAME));
-		characterFactType.set(player, Constantes.SPECIES, PropertyUtils.getSimpleProperty(unitTest, Constantes.SPECIES));
+		characterFactType.set(player, Constantes.SPECIES,
+				PropertyUtils.getSimpleProperty(unitTest, Constantes.SPECIES));
 		characterFactType.set(player, Constantes.AGE, PropertyUtils.getSimpleProperty(unitTest, Constantes.AGE));
 		characterFactType.set(player, Constantes.GENDER, PropertyUtils.getSimpleProperty(unitTest, Constantes.GENDER));
 
@@ -52,22 +53,27 @@ public class DroolsUnitTestExecutor implements Executable {
 		cmds.add(new InsertObjectCommand(player));
 		cmds.add(new AgendaGroupSetFocusCommand(Constantes.RULEFLOW_GROUP));
 
-		cmds.add(new FireAllRulesCommand());
+		cmds.add(new FireAllRulesCommand(Constantes.FIRED));
 		cmds.add(new QueryCommand(Constantes.RESULTS, Constantes.GET_RESULT));
 
 		ExecutionResults response = kieSession.execute(CommandFactory.newBatchExecution(cmds));
 
-		FlatQueryResults queryResult = (FlatQueryResults) response.getValue(Constantes.RESULTS);
+		assertEquals(unitTest.getFired(), (int) response.getValue(Constantes.FIRED));
 
-		Object er = queryResult.iterator().next().get(Constantes.RESULT);
+		if ((int) response.getValue(Constantes.FIRED) == 1) {
 
-		assertNotNull(er);
+			FlatQueryResults queryResult = (FlatQueryResults) response.getValue(Constantes.RESULTS);
 
-		assertEquals(unitTest.isResult(), resultFactType.get(er, Constantes.OK));
-		if (unitTest.isResult()) {
-			assertEquals(unitTest.isAdult(), resultFactType.get(er, Constantes.ADULT));
-		} else {
-			assertEquals(unitTest.getMessage(), resultFactType.get(er, Constantes.MESSAGE));
+			Object er = queryResult.iterator().next().get(Constantes.RESULT);
+
+			assertNotNull(er);
+
+			assertEquals(unitTest.isResult(), resultFactType.get(er, Constantes.OK));
+			if (unitTest.isResult()) {
+				assertEquals(unitTest.isAdult(), resultFactType.get(er, Constantes.ADULT));
+			} else {
+				assertEquals(unitTest.getMessage(), resultFactType.get(er, Constantes.MESSAGE));
+			}
 		}
 	}
 

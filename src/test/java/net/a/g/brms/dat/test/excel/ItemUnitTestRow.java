@@ -39,6 +39,10 @@ public class ItemUnitTestRow {
 
 	@Column(index = 7, name = "message")
 	private String message;
+	
+	@Column(index = 8, name = "fired")
+	private int fired;
+
 
 	public int getAge() {
 		return age;
@@ -112,10 +116,21 @@ public class ItemUnitTestRow {
 		this.testName = testName;
 	}
 
+	public int getFired() {
+		return fired;
+	}
+
+	public void setFired(int fired) {
+		this.fired = fired;
+	}
+
 	@Override
 	public String toString() {
-		return "[ItemUnitTestRow : rowNumber:" + rowNumber + ",name:" + name + ",species:" + species + ",age:" + age
-				+ ",gender:" + gender + ",result:" + result + ",adult:" + adult + ",message:" + message +"]";
+		return "ItemUnitTestRow [rowNumber=" + rowNumber + ", testName=" + testName + ", name=" + name + ", species="
+				+ species + ", age=" + age + ", gender=" + gender + ", result=" + result + ", adult=" + adult
+				+ ", message=" + message + ", fired=" + fired + "]";
 	}
+
+	
 
 }
