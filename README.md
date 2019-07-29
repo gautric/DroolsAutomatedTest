@@ -11,8 +11,8 @@ Goal : Automate Drools Engine testing using Excel document for a business valida
 
 ## Dependencies
 
-* JUnit 5.4.0
-* Drools 7.17.0.Final
+* JUnit 5.5.0
+* Drools 7.24.0.Final
 * Zerocell 0.3.2
 
 ## Test Case
