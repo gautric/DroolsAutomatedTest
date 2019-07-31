@@ -18,7 +18,7 @@ public class ExcelToDrlDemo {
 		InputStream is = null;
 
 		is = new FileInputStream(
-				"/Users/gautric/Source/git/DroolsAutomatedTest/src/main/resources/net/a/g/brms/dat/rule/excel/character.xls");
+				"./src/main/resources/net/a/g/brms/dat/rule/excel/player.xls");
 
 		SpreadsheetCompiler sc = new SpreadsheetCompiler();
 		String drl = sc.compile(is, InputType.XLS);
