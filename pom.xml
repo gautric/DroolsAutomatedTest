@@ -18,6 +18,7 @@
 		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 
+		<cdi-api.version>2.0.SP1</cdi-api.version>
 		<weld.version>3.1.0.Final</weld.version>
 		<weld-junit.version>2.0.0.Final</weld-junit.version>
 		<zerocell.version>0.3.2</zerocell.version>
@@ -117,12 +118,10 @@
 			<version>${commons-beanutils.version}</version>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
-			<version>2.0.SP1</version>
+			<version>${cdi-api.version}</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
