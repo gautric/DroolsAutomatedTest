@@ -17,8 +17,7 @@ import org.drools.core.command.runtime.rule.InsertObjectCommand;
 import org.drools.core.command.runtime.rule.QueryCommand;
 import org.drools.core.runtime.rule.impl.FlatQueryResults;
 import org.junit.jupiter.api.function.Executable;
-import org.kie.api.cdi.KReleaseId;
-import org.kie.api.cdi.KSession;
+import org.kie.api.KieBase;
 import org.kie.api.command.Command;
 import org.kie.api.definition.type.FactType;
 import org.kie.api.runtime.ExecutionResults;
@@ -34,22 +33,22 @@ import net.a.g.brms.dat.util.Constantes;
 public class DroolsUnitTestExecutor implements Executable {
 
 	@Inject
-	@KSession("default-stateless-ksession")
-	@KReleaseId(groupId = "net.a.g.brms", artifactId = "drools-automated-test", version = "1.0.0")
 	private StatelessKieSession kieSession;
+
+	@Inject
+	private KieBase kieBase;
 
 	private ItemUnitTestRow unitTest;
 
 	@Override
 	public void execute() throws Throwable {
 
-		FactType characterFactType = kieSession.getKieBase().getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL,
-				Constantes.PLAYER);
+		FactType characterFactType = kieBase.getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL, Constantes.PLAYER);
 
 		Object player = characterFactType.newInstance();
 
 		PropertyUtils.copyProperties(player, unitTest);
-		
+
 		@SuppressWarnings("rawtypes")
 		List<Command> cmds = new ArrayList<Command>();
 

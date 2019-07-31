@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import org.jboss.weld.junit5.WeldInitiator;
 import org.jboss.weld.junit5.WeldJunit5Extension;
 import org.jboss.weld.junit5.WeldSetup;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
@@ -33,28 +33,22 @@ public class DroolsBatchFactoryTest {
 	@Inject
 	public Instance<DroolsUnitTestExecutor> exec;
 
-	private static File excelFile;
-
-	private static String sheetName;
-
-	@BeforeAll
-	public static void readList() {
-
-		excelFile = new File(
-				DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
-		sheetName = DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
-
-	}
-
 	@TestFactory
+	@DisplayName("Execution des tests Excel")
 	public Stream<DynamicNode> excelExtratorforUnit() throws Exception {
+
+		File excelFile = new File(
+				DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
+		String sheetName = DroolsBatchFactoryProperties
+				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
+
 		return Reader.of(ItemUnitTestRow.class).from(excelFile).sheet(sheetName).list().stream()
 				.map(this::mapItemUnitTestRowtoDynamicTest);
 	}
 
 	public DynamicNode mapItemUnitTestRowtoDynamicTest(Object unit) {
 
-		DroolsUnitTestExecutor execTest = exec.get().addUnitTest(((ItemUnitTestRow) unit));
+		DroolsUnitTestExecutor execTest = exec.get().addUnitTest((ItemUnitTestRow) unit);
 
 		String testName = " [" //$NON-NLS-1$
 				+ ((ItemUnitTestRow) unit).getRowNumber() + "] = " //$NON-NLS-1$
