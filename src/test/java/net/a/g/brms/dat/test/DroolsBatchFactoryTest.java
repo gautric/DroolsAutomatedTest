@@ -3,14 +3,17 @@ package net.a.g.brms.dat.test;
 import java.io.File;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeEach;
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+
+import org.jboss.weld.junit5.WeldInitiator;
+import org.jboss.weld.junit5.WeldJunit5Extension;
+import org.jboss.weld.junit5.WeldSetup;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
-import org.kie.api.KieBase;
-import org.kie.api.KieServices;
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.StatelessKieSession;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,36 +22,44 @@ import com.creditdatamw.zerocell.Reader;
 import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
 import net.a.g.brms.dat.test.util.DroolsBatchFactoryProperties;
 
+@ExtendWith(WeldJunit5Extension.class)
 public class DroolsBatchFactoryTest {
 
 	private static Logger logger = LoggerFactory.getLogger(DroolsBatchFactoryTest.class);
 
-	@BeforeEach
-	public void setUp() {
+	@WeldSetup
+	public WeldInitiator weld = WeldInitiator.performDefaultDiscovery();
+
+	@Inject
+	public Instance<DroolsUnitTestExecutor> exec;
+
+	private static File excelFile;
+
+	private static String sheetName;
+
+	@BeforeAll
+	public static void readList() {
+
+		excelFile = new File(
+				DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
+		sheetName = DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
+
 	}
 
 	@TestFactory
 	public Stream<DynamicNode> excelExtratorforUnit() throws Exception {
-
-		KieServices kServices = KieServices.Factory.get();
-		KieContainer kContainer = kServices.getKieClasspathContainer();
-		KieBase kBase = kContainer.getKieBase("DroolsBatchFactory-default-kbase");
-
-		StatelessKieSession kieSession = kBase.newStatelessKieSession();
-
-		File excelFile = new File(
-				DroolsBatchFactoryProperties.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_FILE_NAME));
-		String sheetName = DroolsBatchFactoryProperties
-				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
-
 		return Reader.of(ItemUnitTestRow.class).from(excelFile).sheet(sheetName).list().stream()
-				.map(unit -> mapItemUnitTestRowtoDynamicTest((ItemUnitTestRow) unit, kieSession));
+				.map(this::mapItemUnitTestRowtoDynamicTest);
 	}
 
-	public static DynamicNode mapItemUnitTestRowtoDynamicTest(ItemUnitTestRow unit, StatelessKieSession kieSession) {
-		String testName = ItemUnitTestRow.class.getName() + " [" + unit.getRowNumber() + "] = " + unit; //$NON-NLS-1$ //$NON-NLS-2$
-		return DynamicTest.dynamicTest(testName,
-				DroolsUnitTestExecutor.builder().addKieSession(kieSession).addUnitTest(unit));
+	public DynamicNode mapItemUnitTestRowtoDynamicTest(Object unit) {
+
+		DroolsUnitTestExecutor execTest = exec.get().addUnitTest(((ItemUnitTestRow) unit));
+
+		String testName = " [" //$NON-NLS-1$
+				+ ((ItemUnitTestRow) unit).getRowNumber() + "] = " //$NON-NLS-1$
+				+ unit;
+		return DynamicTest.dynamicTest(testName, execTest);
 	}
 
 }

@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.drools.core.command.runtime.rule.AgendaGroupSetFocusCommand;
 import org.drools.core.command.runtime.rule.FireAllRulesCommand;
@@ -13,40 +17,39 @@ import org.drools.core.command.runtime.rule.InsertObjectCommand;
 import org.drools.core.command.runtime.rule.QueryCommand;
 import org.drools.core.runtime.rule.impl.FlatQueryResults;
 import org.junit.jupiter.api.function.Executable;
+import org.kie.api.cdi.KReleaseId;
+import org.kie.api.cdi.KSession;
 import org.kie.api.command.Command;
 import org.kie.api.definition.type.FactType;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.internal.command.CommandFactory;
 
+import net.a.g.brms.dat.model.Result;
 import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
 import net.a.g.brms.dat.util.Constantes;
 
+@Named("testUnitExecutor")
+@Dependent
 public class DroolsUnitTestExecutor implements Executable {
 
+	@Inject
+	@KSession("default-stateless-ksession")
+	@KReleaseId(groupId = "net.a.g.brms", artifactId = "drools-automated-test", version = "1.0.0")
 	private StatelessKieSession kieSession;
-	private ItemUnitTestRow unitTest;
 
-	public static DroolsUnitTestExecutor builder() {
-		return new DroolsUnitTestExecutor();
-	}
+	private ItemUnitTestRow unitTest;
 
 	@Override
 	public void execute() throws Throwable {
 
-		FactType resultFactType = kieSession.getKieBase().getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL,
-				Constantes.RESULTTYPE);
 		FactType characterFactType = kieSession.getKieBase().getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL,
 				Constantes.PLAYER);
 
 		Object player = characterFactType.newInstance();
 
-		characterFactType.set(player, Constantes.NAME, PropertyUtils.getSimpleProperty(unitTest, Constantes.NAME));
-		characterFactType.set(player, Constantes.SPECIES,
-				PropertyUtils.getSimpleProperty(unitTest, Constantes.SPECIES));
-		characterFactType.set(player, Constantes.AGE, PropertyUtils.getSimpleProperty(unitTest, Constantes.AGE));
-		characterFactType.set(player, Constantes.GENDER, PropertyUtils.getSimpleProperty(unitTest, Constantes.GENDER));
-
+		PropertyUtils.copyProperties(player, unitTest);
+		
 		@SuppressWarnings("rawtypes")
 		List<Command> cmds = new ArrayList<Command>();
 
@@ -64,38 +67,17 @@ public class DroolsUnitTestExecutor implements Executable {
 
 			FlatQueryResults queryResult = (FlatQueryResults) response.getValue(Constantes.RESULTS);
 
-			Object er = queryResult.iterator().next().get(Constantes.RESULT);
+			Result er = (Result) queryResult.iterator().next().get(Constantes.RESULT);
 
 			assertNotNull(er);
 
-			assertEquals(unitTest.isResult(), resultFactType.get(er, Constantes.OK));
+			assertEquals(unitTest.isResult(), er.isOk());
 			if (unitTest.isResult()) {
-				assertEquals(unitTest.isAdult(), resultFactType.get(er, Constantes.ADULT));
+				assertEquals(unitTest.isAdult(), er.isAdult());
 			} else {
-				assertEquals(unitTest.getMessage(), resultFactType.get(er, Constantes.MESSAGE));
+				assertEquals(unitTest.getMessage(), er.getMessage());
 			}
 		}
-	}
-
-	public StatelessKieSession getKieSession() {
-		return kieSession;
-	}
-
-	public void setKieSession(StatelessKieSession kieSession) {
-		this.kieSession = kieSession;
-	}
-
-	public ItemUnitTestRow getUnitTest() {
-		return unitTest;
-	}
-
-	public void setUnitTest(ItemUnitTestRow unitTest) {
-		this.unitTest = unitTest;
-	}
-
-	public DroolsUnitTestExecutor addKieSession(StatelessKieSession kieSession) {
-		this.kieSession = kieSession;
-		return this;
 	}
 
 	public DroolsUnitTestExecutor addUnitTest(ItemUnitTestRow unitTest) {
