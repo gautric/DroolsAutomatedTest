@@ -15,6 +15,14 @@ Goal : Automate Drools Engine testing using Excel document for a business valida
 * Drools 7.24.0.Final
 * Zerocell 0.3.2
 
+
+## Rule Case
+
+Rules are developed with Excel Drools feature. They can be found into _src/main/resources/net/a/g/brms/dat/rule/excel_ folder.
+Please see Drools documentation how to develop with it.
+
+![Image du fichier Excel](img/rules.png?raw=true)
+
 ## Test Case
 
 Excel document can be found into _src/test/resources_ folder
