@@ -25,7 +25,7 @@ import net.a.g.brms.dat.test.util.DroolsBatchFactoryProperties;
 @ExtendWith(WeldJunit5Extension.class)
 public class DroolsBatchFactoryTest {
 
-	private static Logger logger = LoggerFactory.getLogger(DroolsBatchFactoryTest.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(DroolsBatchFactoryTest.class);
 
 	@WeldSetup
 	public WeldInitiator weld = WeldInitiator.performDefaultDiscovery();
