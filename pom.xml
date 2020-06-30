@@ -10,9 +10,9 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<kie.bom.version>7.38.0.Final</kie.bom.version>
+		<kie.bom.version>7.34.0.Final</kie.bom.version>
 
-		<junit.bom.version>5.6.1</junit.bom.version>
+		<junit.bom.version>5.6.2</junit.bom.version>
 
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
