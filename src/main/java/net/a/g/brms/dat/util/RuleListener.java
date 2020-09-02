@@ -12,12 +12,12 @@ public class RuleListener extends DefaultAgendaEventListener {
 
 	@Override
 	public void beforeMatchFired(BeforeMatchFiredEvent event) {
-		LOGGER.error("=> Rule Fired : '{}'", event.getMatch().getRule().getName());
+		LOGGER.info("=> Rule Fired : '{}'", event.getMatch().getRule().getName());
 
 	}
 
 	@Override
 	public void afterRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
-		LOGGER.error("=> RuleFlowGroup Activated : '{}'", event.getRuleFlowGroup().getName());
+		LOGGER.info("=> RuleFlowGroup Activated : '{}'", event.getRuleFlowGroup().getName());
 	}
 }

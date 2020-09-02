@@ -18,6 +18,7 @@ import org.drools.core.command.runtime.rule.QueryCommand;
 import org.drools.core.runtime.rule.impl.FlatQueryResults;
 import org.junit.jupiter.api.function.Executable;
 import org.kie.api.KieBase;
+import org.kie.api.cdi.KSession;
 import org.kie.api.command.Command;
 import org.kie.api.definition.type.FactType;
 import org.kie.api.runtime.ExecutionResults;
@@ -27,6 +28,7 @@ import org.kie.internal.command.CommandFactory;
 import net.a.g.brms.dat.model.Result;
 import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
 import net.a.g.brms.dat.util.Constantes;
+import net.a.g.brms.dat.util.RuleListener;
 
 @Named("testUnitExecutor")
 @Dependent
@@ -46,6 +48,8 @@ public class DroolsUnitTestExecutor implements Executable {
 		FactType characterFactType = kieBase.getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL, Constantes.PLAYER);
 
 		Object player = characterFactType.newInstance();
+		
+		kieSession.addEventListener(new RuleListener());
 
 		PropertyUtils.copyProperties(player, unitTest);
 
