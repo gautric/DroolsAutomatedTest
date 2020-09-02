@@ -39,94 +39,59 @@ To parse Excel file we gonna use [Zerocell](https://github.com/creditdatamw/zero
 
 ## Maven Mode
 
+The command to execute test.
+
 ```
 mvn test
 ```
 
+The result of the previous command.
+
 ```
+[INFO] --- maven-surefire-plugin:3.0.0-M4:test (default-test) @ drools-automated-test ---
+[INFO] 
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running net.a.g.brms.dat.test.DroolsBatchFactoryTest
-16:27:57.191 [main] INFO  o.k.a.i.utils.ServiceDiscoveryImpl - Loading kie.conf from  jar:file:/Users/gautric/.m2/repository/org/drools/drools-compiler/7.17.0.Final/drools-compiler-7.17.0.Final.jar!/META-INF/kie.conf in classloader jdk.internal.loader.ClassLoaders$AppClassLoader@799f7e29
+23:35:25,069 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+23:35:25,069 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+23:35:25,070 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/gautric/Dropbox/Source/DroolsAutomatedTest/target/test-classes/logback.xml]
+23:35:25,213 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+23:35:25,229 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+23:35:25,236 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+23:35:25,388 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - This appender no longer admits a layout as a sub-component, set an encoder instead.
+23:35:25,389 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - To ensure compatibility, wrapping your layout in LayoutWrappingEncoder.
+23:35:25,389 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - See also http://logback.qos.ch/codes.html#layoutInsteadOfEncoder for details
+23:35:25,392 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.jbpm] to DEBUG
+23:35:25,392 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.drools] to DEBUG
+23:35:25,392 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.drools.core.common] to INFO
+23:35:25,392 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [net.a.g] to INFO
+23:35:25,393 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to ERROR
+23:35:25,393 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+23:35:25,393 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+23:35:25,394 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@6d026701 - Registering current configuration as safe fallback point
 
-
-....
-
-
-16:27:57.246 [main] INFO  o.d.c.k.b.impl.ClasspathKieProject - Found kmodule: file:/Users/gautric/Source/git/DroolsAutomatedTest/target/classes/META-INF/kmodule.xml
-16:27:57.247 [main] DEBUG o.d.c.k.b.impl.ClasspathKieProject - KieModule URL type=file url=/Users/gautric/Source/git/DroolsAutomatedTest/target/classes
-16:27:57.627 [main] WARN  o.d.c.k.b.impl.ClasspathKieProject - Unable to find pom.properties in /Users/gautric/Source/git/DroolsAutomatedTest/target/classes
-16:27:57.635 [main] INFO  o.d.c.k.b.impl.ClasspathKieProject - Recursed up folders, found and used pom.xml /Users/gautric/Source/git/DroolsAutomatedTest/pom.xml
-16:27:57.641 [main] DEBUG o.d.c.k.b.impl.ClasspathKieProject - Discovered classpath module net.a.g.brms:drools-automated-test:1.0.0
-16:27:57.644 [main] INFO  o.d.c.k.b.impl.KieRepositoryImpl - KieModule was added: FileKieModule[releaseId=net.a.g.brms:drools-automated-test:1.0.0,file=/Users/gautric/Source/git/DroolsAutomatedTest/target/classes]
-16:27:59.871 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now FIRING_ALL_RULES
-16:27:59.931 [main] DEBUG org.drools.core.common.DefaultAgenda - State was FIRING_ALL_RULES is now HALTING
-16:27:59.931 [main] DEBUG org.drools.core.common.DefaultAgenda - State was HALTING is now INACTIVE
-16:27:59.932 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.932 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.932 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.932 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.935 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.938 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.945 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now DISPOSED
-16:27:59.957 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now FIRING_ALL_RULES
-16:27:59.958 [main] DEBUG org.drools.core.common.DefaultAgenda - State was FIRING_ALL_RULES is now HALTING
-16:27:59.958 [main] DEBUG org.drools.core.common.DefaultAgenda - State was HALTING is now INACTIVE
-16:27:59.959 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.959 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.959 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.959 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.959 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.963 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.964 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now DISPOSED
-16:27:59.967 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now FIRING_ALL_RULES
-16:27:59.971 [main] DEBUG org.drools.core.common.DefaultAgenda - State was FIRING_ALL_RULES is now HALTING
-16:27:59.971 [main] DEBUG org.drools.core.common.DefaultAgenda - State was HALTING is now INACTIVE
-16:27:59.972 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.973 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.974 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.974 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.975 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.976 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.976 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now DISPOSED
-16:27:59.979 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now FIRING_ALL_RULES
-16:27:59.981 [main] DEBUG org.drools.core.common.DefaultAgenda - State was FIRING_ALL_RULES is now HALTING
-16:27:59.981 [main] DEBUG org.drools.core.common.DefaultAgenda - State was HALTING is now INACTIVE
-16:27:59.982 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.982 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.982 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.984 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.984 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.985 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.986 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now DISPOSED
-16:27:59.987 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now FIRING_ALL_RULES
-16:27:59.991 [main] DEBUG org.drools.core.common.DefaultAgenda - State was FIRING_ALL_RULES is now HALTING
-16:27:59.991 [main] DEBUG org.drools.core.common.DefaultAgenda - State was HALTING is now INACTIVE
-16:27:59.993 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.993 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.994 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.994 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.994 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:27:59.995 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:27:59.995 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now DISPOSED
-16:27:59.998 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now FIRING_ALL_RULES
-16:28:00.001 [main] DEBUG org.drools.core.common.DefaultAgenda - State was FIRING_ALL_RULES is now HALTING
-16:28:00.002 [main] DEBUG org.drools.core.common.DefaultAgenda - State was HALTING is now INACTIVE
-16:28:00.003 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:28:00.005 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:28:00.005 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:28:00.005 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:28:00.008 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now EXECUTING_TASK
-16:28:00.012 [main] DEBUG org.drools.core.common.DefaultAgenda - State was EXECUTING_TASK is now INACTIVE
-16:28:00.017 [main] DEBUG org.drools.core.common.DefaultAgenda - State was INACTIVE is now DISPOSED
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.001 s - in net.a.g.brms.dat.test.DroolsBatchFactoryTest
-[INFO]
+2020-09-02 23:35:26 [main] INFO  o.d.c.k.b.impl.ClasspathKieProject - Found kmodule: file:/Users/gautric/Dropbox/Source/DroolsAutomatedTest/target/classes/META-INF/kmodule.xml
+2020-09-02 23:35:26 [main] DEBUG o.d.c.k.b.impl.ClasspathKieProject - KieModule URL type=file url=/Users/gautric/Dropbox/Source/DroolsAutomatedTest/target/classes
+2020-09-02 23:35:27 [main] WARN  o.d.c.k.b.impl.ClasspathKieProject - Unable to find pom.properties in /Users/gautric/Dropbox/Source/DroolsAutomatedTest/target/classes
+2020-09-02 23:35:27 [main] INFO  o.d.c.k.b.impl.ClasspathKieProject - Recursed up folders, found and used pom.xml /Users/gautric/Dropbox/Source/DroolsAutomatedTest/pom.xml
+2020-09-02 23:35:27 [main] DEBUG o.d.c.k.b.impl.ClasspathKieProject - Discovered classpath module net.a.g.brms:drools-automated-test:1.0.0
+2020-09-02 23:35:27 [main] DEBUG o.d.c.k.b.impl.KieRepositoryImpl - KieModule was added: org.drools.modelcompiler.CanonicalKieModule@23202c31
+2020-09-02 23:35:27 [main] DEBUG org.drools.cdi.KieCDIExtension - Added Bean for @KBase(null)
+2020-09-02 23:35:27 [main] DEBUG org.drools.cdi.KieCDIExtension - Added Bean for Stateless @KSession(null) from: org.drools.modelcompiler.CanonicalKieModule@23202c31
+2020-09-02 23:35:29 [main] INFO  net.a.g.brms.dat.util.RuleListener - => Rule Fired : 'Rule : HUMAN <  >= 18'
+2020-09-02 23:35:29 [main] INFO  net.a.g.brms.dat.util.RuleListener - => Rule Fired : 'Rule : HUMAN <  >= 18'
+2020-09-02 23:35:29 [main] INFO  net.a.g.brms.dat.util.RuleListener - => Rule Fired : 'Rule : WOOKIEE <  >= 75'
+2020-09-02 23:35:29 [main] INFO  net.a.g.brms.dat.util.RuleListener - => Rule Fired : 'Rule : HUMAN < 18 >='
+2020-09-02 23:35:29 [main] INFO  net.a.g.brms.dat.util.RuleListener - => Rule Fired : 'Rule : HUMAN <  >= 18'
+2020-09-02 23:35:29 [main] INFO  net.a.g.brms.dat.util.RuleListener - => Rule Fired : 'Rule : UNKNOW <  >='
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.421 s - in net.a.g.brms.dat.test.DroolsBatchFactoryTest
+[INFO] 
 [INFO] Results:
-[INFO]
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
-[INFO]
-[INFO]
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+
 
 ```
 
