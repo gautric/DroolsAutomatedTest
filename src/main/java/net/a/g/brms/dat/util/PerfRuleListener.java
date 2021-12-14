@@ -31,13 +31,13 @@ public class PerfRuleListener extends DefaultAgendaEventListener {
 
 	@Override
 	public void matchCreated(MatchCreatedEvent event) {
-		rule_when_context = metricRegistry.timer("rule-when-" + event.getMatch().getRule().getName()).time();
+		rule_when_context = metricRegistry.timer("rule-" + event.getMatch().getRule().getName()+"-lhs(when)").time();
 	}
 
 	@Override
 	public void beforeMatchFired(BeforeMatchFiredEvent event) {
 		rule_when_context.stop();
-		rule_then_context = metricRegistry.timer("rule-then-" + event.getMatch().getRule().getName()).time();
+		rule_then_context = metricRegistry.timer("rule-" + event.getMatch().getRule().getName()+"-rhs(then)").time();
 	}
 
 	@Override
