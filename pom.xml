@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.a.g.brms</groupId>
 	<artifactId>drools-automated-test</artifactId>
@@ -10,6 +8,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
+		<!--kie.bom.version>7.62.0.Final</kie.bom.version-->
 		<kie.bom.version>7.34.0.Final</kie.bom.version>
 
 		<junit.bom.version>5.7.0-M1</junit.bom.version>
@@ -17,6 +16,8 @@
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
 		<commons-beanutils.version>[1.9.4,)</commons-beanutils.version>
+
+		<metrics.version></metrics.version>
 
 		<cdi-api.version>2.0.SP1</cdi-api.version>
 		<weld.version>3.1.4.Final</weld.version>
@@ -80,6 +81,10 @@
 			<groupId>org.drools</groupId>
 			<artifactId>drools-model-compiler</artifactId>
 		</dependency>
+
+
+
+
 
 		<dependency>
 			<groupId>org.junit.platform</groupId>
@@ -148,6 +153,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>io.dropwizard.metrics</groupId>
+			<artifactId>metrics-core</artifactId>
+			<version>4.1.27</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -167,9 +177,7 @@
 				<extensions>true</extensions>
 				<executions>
 					<execution>
-						<goals>
-
-						</goals>
+						<goals></goals>
 						<phase>compile</phase>
 					</execution>
 				</executions>
