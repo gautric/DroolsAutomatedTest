@@ -3,15 +3,15 @@
 	<groupId>net.a.g.brms</groupId>
 	<artifactId>drools-automated-test</artifactId>
 	<version>1.0.0</version>
-	<packaging>kjar</packaging>
+	<packaging>jar</packaging>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
 		<!--kie.bom.version>7.62.0.Final</kie.bom.version-->
-		<kie.bom.version>7.34.0.Final</kie.bom.version>
+		<kie.bom.version>8.15.0.Beta</kie.bom.version>
 
-		<junit.bom.version>5.7.0-M1</junit.bom.version>
+		<junit.bom.version>5.8.2</junit.bom.version>
 
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
@@ -22,12 +22,12 @@
 		<cdi-api.version>2.0.SP1</cdi-api.version>
 		<weld.version>3.1.4.Final</weld.version>
 		<weld-junit5.version>2.0.1.Final</weld-junit5.version>
-		<zerocell.version>0.3.2</zerocell.version>
+		<zerocell.version>0.5.1</zerocell.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
+			<!--dependency>
 				<groupId>org.kie</groupId>
 				<artifactId>kie-bom</artifactId>
 				<version>${kie.bom.version}</version>
@@ -40,7 +40,7 @@
 				<version>${kie.bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
+			</dependency-->
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
@@ -55,36 +55,36 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-api</artifactId>
+			<version>${kie.bom.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-cdi</artifactId>
+			<version>${kie.bom.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
+			<version>${kie.bom.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-decisiontables</artifactId>
+			<version>${kie.bom.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-canonical-model</artifactId>
+			<version>${kie.bom.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-model-compiler</artifactId>
+			<version>${kie.bom.version}</version>
 		</dependency>
-
-
-
-
 
 		<dependency>
 			<groupId>org.junit.platform</groupId>
@@ -115,6 +115,16 @@
 			<artifactId>zerocell-core</artifactId>
 			<version>${zerocell.version}</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi-ooxml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.poi</groupId>
+					<artifactId>poi</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -169,18 +179,6 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.kie</groupId>
-				<artifactId>kie-maven-plugin</artifactId>
-				<version>${kie.bom.version}</version>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<goals></goals>
-						<phase>compile</phase>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
