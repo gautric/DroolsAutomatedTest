@@ -18,16 +18,19 @@ import org.drools.core.command.runtime.rule.QueryCommand;
 import org.drools.core.runtime.rule.impl.FlatQueryResults;
 import org.junit.jupiter.api.function.Executable;
 import org.kie.api.KieBase;
-import org.kie.api.cdi.KSession;
 import org.kie.api.command.Command;
 import org.kie.api.definition.type.FactType;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.StatelessKieSession;
 import org.kie.internal.command.CommandFactory;
 
+import com.codahale.metrics.Timer;
+import com.codahale.metrics.Timer.Context;
+
 import net.a.g.brms.dat.model.Result;
 import net.a.g.brms.dat.test.excel.ItemUnitTestRow;
 import net.a.g.brms.dat.util.Constantes;
+import net.a.g.brms.dat.util.PerfRuleListener;
 import net.a.g.brms.dat.util.RuleListener;
 
 @Named("testUnitExecutor")
@@ -48,8 +51,10 @@ public class DroolsUnitTestExecutor implements Executable {
 		FactType characterFactType = kieBase.getFactType(Constantes.NET_A_G_BRMS_DAT_MODEL, Constantes.PLAYER);
 
 		Object player = characterFactType.newInstance();
-		
-		kieSession.addEventListener(new RuleListener());
+
+		kieSession.addEventListener(RuleListener.getInstance());
+
+		kieSession.addEventListener(PerfRuleListener.getInstance());
 
 		PropertyUtils.copyProperties(player, unitTest);
 
@@ -62,7 +67,11 @@ public class DroolsUnitTestExecutor implements Executable {
 		cmds.add(new FireAllRulesCommand(Constantes.FIRED));
 		cmds.add(new QueryCommand(Constantes.RESULTS, Constantes.GET_RESULT));
 
+		Context context = PerfRuleListener.metricRegistry.timer("fireallrule").time();
+
 		ExecutionResults response = kieSession.execute(CommandFactory.newBatchExecution(cmds));
+
+		context.stop();
 
 		assertEquals(unitTest.getFired(), (int) response.getValue(Constantes.FIRED));
 

@@ -22,27 +22,26 @@ public class ItemUnitTestRow {
 	@Column(index = 1, name = "name")
 	private String name;
 
-	@Column(index = 2, name = "species", convertorClass = SpeciesConverter.class)
+	@Column(index = 2, name = "species", converterClass = SpeciesConverter.class)
 	private Species species;
 
 	@Column(index = 3, name = "age")
 	private int age;
 
-	@Column(index = 4, name = "gender", convertorClass = GenderConverter.class)
+	@Column(index = 4, name = "gender", converterClass = GenderConverter.class)
 	private Gender gender;
 
-	@Column(index = 5, name = "result", convertorClass = ResultConverter.class)
+	@Column(index = 5, name = "result", converterClass = ResultConverter.class)
 	private boolean result;
 
-	@Column(index = 6, name = "adult", convertorClass = AdultConverter.class)
+	@Column(index = 6, name = "adult", converterClass = AdultConverter.class)
 	private boolean adult;
 
 	@Column(index = 7, name = "message")
 	private String message;
-	
+
 	@Column(index = 8, name = "fired")
 	private int fired;
-
 
 	public int getAge() {
 		return age;
@@ -130,7 +129,5 @@ public class ItemUnitTestRow {
 				+ species + ", age=" + age + ", gender=" + gender + ", result=" + result + ", adult=" + adult
 				+ ", message=" + message + ", fired=" + fired + "]";
 	}
-
-	
 
 }
