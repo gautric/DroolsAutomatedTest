@@ -39,10 +39,9 @@ public class ItemUnitTestRow {
 
 	@Column(index = 7, name = "message")
 	private String message;
-	
+
 	@Column(index = 8, name = "fired")
 	private int fired;
-
 
 	public int getAge() {
 		return age;
@@ -130,7 +129,5 @@ public class ItemUnitTestRow {
 				+ species + ", age=" + age + ", gender=" + gender + ", result=" + result + ", adult=" + adult
 				+ ", message=" + message + ", fired=" + fired + "]";
 	}
-
-	
 
 }

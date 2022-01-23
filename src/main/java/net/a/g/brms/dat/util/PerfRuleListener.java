@@ -1,6 +1,7 @@
 package net.a.g.brms.dat.util;
 
 import org.kie.api.event.rule.AfterMatchFiredEvent;
+import org.kie.api.event.rule.AgendaEventListener;
 import org.kie.api.event.rule.AgendaGroupPoppedEvent;
 import org.kie.api.event.rule.AgendaGroupPushedEvent;
 import org.kie.api.event.rule.BeforeMatchFiredEvent;
@@ -15,9 +16,9 @@ import com.codahale.metrics.Timer;
 
 public class PerfRuleListener extends DefaultAgendaEventListener {
 
-	private static PerfRuleListener instance = new PerfRuleListener();
+	private static AgendaEventListener instance = new PerfRuleListener();
 
-	public static PerfRuleListener getInstance() {
+	public static AgendaEventListener getInstance() {
 		return instance;
 	}
 
@@ -31,13 +32,13 @@ public class PerfRuleListener extends DefaultAgendaEventListener {
 
 	@Override
 	public void matchCreated(MatchCreatedEvent event) {
-		rule_when_context = metricRegistry.timer("rule-" + event.getMatch().getRule().getName()+"-lhs(when)").time();
+		rule_when_context = metricRegistry.timer("rule-" + event.getMatch().getRule().getName() + "-lhs(when)").time();
 	}
 
 	@Override
 	public void beforeMatchFired(BeforeMatchFiredEvent event) {
 		rule_when_context.stop();
-		rule_then_context = metricRegistry.timer("rule-" + event.getMatch().getRule().getName()+"-rhs(then)").time();
+		rule_then_context = metricRegistry.timer("rule-" + event.getMatch().getRule().getName() + "-rhs(then)").time();
 	}
 
 	@Override
