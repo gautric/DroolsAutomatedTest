@@ -7,14 +7,13 @@ Goal : Automate Drools Engine testing using Excel document for a business valida
 ## Requirements
 
 * JDK 11+
-* Maven 3.6.0+
+* Maven 3.8+
 
 ## Dependencies
 
-* JUnit 5.6.1
-* Drools 7.34.0.Final
-* Zerocell 0.3.2
-
+* JUnit 5.7+
+* Drools 8.16+
+* Zerocell 0.5.1
 
 ## Rule Case
 
