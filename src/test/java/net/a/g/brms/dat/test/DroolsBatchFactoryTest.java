@@ -1,6 +1,7 @@
 package net.a.g.brms.dat.test;
 
 import java.io.File;
+import java.util.List;
 import java.util.stream.Stream;
 
 import javax.enterprise.inject.Instance;
@@ -42,8 +43,12 @@ public class DroolsBatchFactoryTest {
 		String sheetName = DroolsBatchFactoryProperties
 				.getString(DroolsBatchFactoryProperties.CHARACTER_UNIT_TEST_SHEET);
 
-		return Reader.of(ItemUnitTestRow.class).from(excelFile).sheet(sheetName).list().stream()
+		return extractListOfTest(excelFile, sheetName).stream()
 				.map(this::mapItemUnitTestRowtoDynamicTest);
+	}
+
+	private List<ItemUnitTestRow> extractListOfTest(File excelFile, String sheetName) {
+		return Reader.of(ItemUnitTestRow.class).from(excelFile).sheet(sheetName).list();
 	}
 
 	public DynamicNode mapItemUnitTestRowtoDynamicTest(Object unit) {

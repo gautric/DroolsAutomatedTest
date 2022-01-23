@@ -3,43 +3,42 @@
 	<groupId>net.a.g.brms</groupId>
 	<artifactId>drools-automated-test</artifactId>
 	<version>1.0.0</version>
-	<packaging>kjar</packaging>
+	<packaging>jar</packaging>
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.testSource>11</maven.compiler.testSource>
+		<maven.compiler.testTarget>11</maven.compiler.testTarget>
 
-		<!--kie.bom.version>7.62.0.Final</kie.bom.version-->
-		<kie.bom.version>7.34.0.Final</kie.bom.version>
-
+		<kie.bom.version>8.16.0.Beta</kie.bom.version>
 		<junit.bom.version>5.7.0-M1</junit.bom.version>
 
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
 		<commons-beanutils.version>[1.9.4,)</commons-beanutils.version>
 
-		<metrics.version></metrics.version>
+		<metrics.version>4.1.27</metrics.version>
 
 		<cdi-api.version>2.0.SP1</cdi-api.version>
 		<weld.version>3.1.4.Final</weld.version>
 		<weld-junit5.version>2.0.1.Final</weld-junit5.version>
-		<zerocell.version>0.3.2</zerocell.version>
+		<zerocell.version>0.5.1</zerocell.version>
+		<slf4j.version>1.7.33</slf4j.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.kie</groupId>
-				<artifactId>kie-bom</artifactId>
+				<artifactId>kie-core-bom</artifactId>
 				<version>${kie.bom.version}</version>
 				<type>pom</type>
-				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.drools</groupId>
 				<artifactId>drools-bom</artifactId>
 				<version>${kie.bom.version}</version>
 				<type>pom</type>
-				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.junit</groupId>
@@ -55,36 +54,39 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-api</artifactId>
-			<scope>provided</scope>
+			<version>${kie.bom.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-cdi</artifactId>
+			<version>${kie.bom.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
-			<scope>provided</scope>
+			<version>${kie.bom.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-decisiontables</artifactId>
-			<scope>provided</scope>
+			<version>${kie.bom.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-tms</artifactId>
+			<version>${kie.bom.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-canonical-model</artifactId>
+			<version>${kie.bom.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-model-compiler</artifactId>
+			<version>${kie.bom.version}</version>
 		</dependency>
-
-
-
-
 
 		<dependency>
 			<groupId>org.junit.platform</groupId>
@@ -156,8 +158,15 @@
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
-			<version>4.1.27</version>
+			<version>${metrics.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -169,18 +178,6 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.kie</groupId>
-				<artifactId>kie-maven-plugin</artifactId>
-				<version>${kie.bom.version}</version>
-				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<goals></goals>
-						<phase>compile</phase>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
