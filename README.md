@@ -19,7 +19,7 @@ Goal : Automate Drools Engine testing using Excel document for a business valida
 ## Rule Case
 
 Rules are developed with Excel Drools feature. They can be found into _src/main/resources/net/a/g/brms/dat/rule/excel_ folder.
-Please see Drools documentation how to develop with it.
+[Please see Drools documentation how to develop with it.](https://docs.jboss.org/drools/release/latest/drools-docs/html_single/#decision-tables-con_decision-tables)
 
 ![Image du fichier Excel](img/rules.png?raw=true)
 
