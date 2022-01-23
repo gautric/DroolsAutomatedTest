@@ -1,4 +1,4 @@
-name: jdk11-ci
+name: jdk11-test-ci
 
 on: [push]
 
